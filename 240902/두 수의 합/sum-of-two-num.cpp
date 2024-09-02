@@ -6,12 +6,16 @@ using namespace std;
 map<int, short> m;
 
 ll factorial(int n) {
-    if (n == 1)return 1;
-    else n * factorial(n - 1);
+    ll ans = 1;
+    for (int i = 1; i <= n; i++) {
+        ans *= i;
+    }
+    return ans;
 }
 
 ll permutation(int n, int k) {
-    return factorial(n) / factorial(n - k);
+    if (n == 0)return 0;
+    return factorial(n) / (factorial(n - k) * factorial(k));
 }
 
 int main() {
@@ -42,12 +46,12 @@ int main() {
         if (Second == First) {
             //k는 4, n=2
             ans += permutation(freq, 2);
-            m[Second]=0;
+            m[Second] = 0;
         } else {
             if (m.find(Second) == m.end())continue; // map에 존재하지 않으면 pass
             ans += (freq * m[Second]); // *의 개수 * k-*의 개수
-            m[First]=0;
-            m[Second]=0;
+            m[First] = 0;
+            m[Second] = 0;
         }
 
     }
