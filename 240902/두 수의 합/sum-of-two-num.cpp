@@ -3,7 +3,7 @@
 #include<limits.h>
 using namespace std;
 #define ll  long long
-map<int, short> m;
+map<ll, int> m;
 
 ll factorial(int n) {
     ll ans = 1;
