@@ -4,17 +4,17 @@
 
 using namespace std;
 #define ll  long long
-map<ll, int> m;
+map<ll, ll> m;
 
-ll factorial(int n) {
+ll factorial(ll n) {
     ll ans = 1;
-    for (int i = 1; i <= n; i++) {
+    for (ll i = 1; i <= n; i++) {
         ans *= i;
     }
     return ans;
 }
 
-ll permutation(int n, int k) {
+ll permutation(ll n, ll k) {
     if (n == 0)return 0;
     return factorial(n) / (factorial(n - k) * factorial(k));
 }
@@ -24,8 +24,8 @@ int main() {
     ll n, k;
     cin >> n >> k;
 
-    for (int i = 0; i < n; i++) {
-        int num;
+    for (ll i = 0; i < n; i++) {
+        ll num;
         cin >> num;
         if (m.find(num) == m.end()) {
             m[num] = 1;
