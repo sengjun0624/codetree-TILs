@@ -3,52 +3,45 @@
 #include <climits>
 
 using namespace std;
-#define ll  long long
-map<ll, ll> m;
 
+#define ll long long
+map<ll, ll> frequencyMap;
 
-ll permutation(ll n, ll k) {
-    if (n == 0)return 0;
-    return n * (n - 1) / 2;
+ll calculatePairs(ll count) {
+    if (count == 0) return 0;
+    return count * (count - 1) / 2;
 }
 
 int main() {
-    // 여기에 코드를 작성해주세요.
-    ll n, k;
-    cin >> n >> k;
+    ll n, targetSum;
+    cin >> n >> targetSum;
 
+    // 숫자 입력 및 빈도수 계산
     for (ll i = 0; i < n; i++) {
         ll num;
         cin >> num;
-
-        if (m.find(num) == m.end()) {
-            m[num] = 1;
-        } else m[num]++;
+        frequencyMap[num]++;
     }
-    //0으로 바꾸면
-    ll ans = 0;
 
-    for (auto pair: m) {
-        // k-* 의 *이 first
-        ll First = pair.first;
-        // *의 갯수
-        ll freq = pair.second;
-        // k에서 뺀값 = *에서 X를 더하면 K가 되는수
-        ll Second = k - First;
-        // 같은 수를 더해서 k가 될때
+    ll pairCount = 0;
 
-        if (Second == First) {
-            //k는 4, n=2
-            ans += permutation(freq, 2);
-            m[Second] = 0;
+    for (auto element : frequencyMap) {
+        ll number = element.first;
+        ll count = element.second;
+        ll complement = targetSum - number;
+
+        // 같은 수를 더해서 targetSum이 되는 경우
+        if (complement == number) {
+            pairCount += calculatePairs(count);
+            frequencyMap[complement] = 0; // 이미 계산된 수는 더 이상 처리하지 않음
         } else {
-            if (m.find(Second) == m.end())continue; // map에 존재하지 않으면 pass
-            ans += (freq * m[Second]); // *의 개수 * k-*의 개수
-            m[First] = 0;
-            m[Second] = 0;
+            if (frequencyMap.find(complement) == frequencyMap.end()) continue; // complement가 존재하지 않으면 pass
+            pairCount += (count * frequencyMap[complement]); // 두 수의 빈도수 곱
+            frequencyMap[number] = 0;
+            frequencyMap[complement] = 0;
         }
-
     }
-    cout << ans;
+
+    cout << pairCount;
     return 0;
 }
