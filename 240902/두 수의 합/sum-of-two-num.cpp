@@ -1,6 +1,7 @@
 #include <iostream>
 #include <map>
-#include<limits.h>
+#include <climits>
+
 using namespace std;
 #define ll  long long
 map<ll, int> m;
@@ -40,7 +41,7 @@ int main() {
         // k에서 뺀값 = *에서 X를 더하면 K가 되는수
         ll Second = k - First;
         // 같은 수를 더해서 k가 될때
-        if(Second>INT_MAX||Second<INT_MIN) continue;
+        if (Second > INT_MAX || Second < INT_MIN) continue;
         if (Second == First) {
             //k는 4, n=2
             ans += permutation(freq, 2);
