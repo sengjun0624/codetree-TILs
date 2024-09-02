@@ -3,7 +3,7 @@
 
 using namespace std;
 #define ll  long long
-map<int, int> m;
+map<int, short> m;
 
 ll factorial(int n) {
     if (n == 1)return 1;
